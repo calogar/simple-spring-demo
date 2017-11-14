@@ -19,4 +19,6 @@ public interface UserDao extends CrudRepository<User, Integer> {
 	void delete(User user);
 
 	User findUserByUsername(String username);
+
+	void deleteAllInBatch();
 }

@@ -19,7 +19,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{userId}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	private User findOne(@PathVariable("userId") Integer userId) {
 		return userService.findOne(userId);
 	}
