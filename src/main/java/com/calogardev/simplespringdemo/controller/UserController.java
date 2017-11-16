@@ -19,7 +19,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/{userId}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
 	private User findOne(@PathVariable("userId") Integer userId) {
 		return userService.findOne(userId);
 	}
@@ -30,7 +30,13 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	private User save(@RequestBody User user) {
+	private User create(@RequestBody User user) {
+		return userService.save(user);
+	}
+
+	@RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
+	private User update(@PathVariable("userId") Integer userId, @RequestBody User user) {
+		user.setId(userId);
 		return userService.save(user);
 	}
 
