@@ -31,12 +31,13 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	private User create(@RequestBody User user) {
+		user.setId(null); // To ensure we create instead of update
 		return userService.save(user);
 	}
 
 	@RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
 	private User update(@PathVariable("userId") Integer userId, @RequestBody User user) {
-		user.setId(userId);
+		user.setId(userId); // To ensure we update instead of create
 		return userService.save(user);
 	}
 
