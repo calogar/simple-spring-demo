@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.calogardev.simplespringdemo.jsonviews.Views;
 import com.calogardev.simplespringdemo.model.User;
 import com.calogardev.simplespringdemo.service.UserService;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -24,8 +26,25 @@ public class UserController {
 		return userService.findOne(userId);
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(method = RequestMethod.GET)
 	private List<User> findAll() {
+		return userService.findAll();
+	}
+
+	// When calling localhost:8080/users/internal, we will get public and
+	// internal fields
+	@JsonView(Views.Internal.class)
+	@RequestMapping(value = "/internal", method = RequestMethod.GET)
+	private List<User> findAllAndReturnInternalFields() {
+		return userService.findAll();
+	}
+
+	// When calling localhost:8080/users/private, we will get public, internal
+	// and private fields
+	@JsonView(Views.Private.class)
+	@RequestMapping(value = "/private", method = RequestMethod.GET)
+	private List<User> findAllAndReturnPrivateFields() {
 		return userService.findAll();
 	}
 

@@ -12,6 +12,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.calogardev.simplespringdemo.enums.GenderEnum;
+import com.calogardev.simplespringdemo.jsonviews.Views;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class User implements Serializable {
@@ -20,15 +22,20 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue
+	@JsonView(Views.Public.class)
 	private Integer id;
 
+	@JsonView(Views.Public.class)
 	private String username;
 
+	@JsonView(Views.Private.class)
 	private String password;
 
+	@JsonView(Views.Internal.class)
 	@Enumerated(EnumType.STRING)
 	private GenderEnum gender;
 
+	@JsonView(Views.Public.class)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastUpdated;
 
