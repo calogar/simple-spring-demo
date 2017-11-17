@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.calogardev.simplespringdemo.enums.GenderEnum;
 import com.calogardev.simplespringdemo.model.User;
 import com.calogardev.simplespringdemo.service.UserService;
 
@@ -21,8 +22,8 @@ public class SimpleSpringDemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 
-		userService.save(new User("it's me", "123456"));
-		userService.save(new User("it's also me", "123123"));
-		userService.save(new User("it's me again!", "987654321"));
+		userService.save(new User("Carlos", "123456", GenderEnum.MALE));
+		userService.save(new User("Eva", "123123", GenderEnum.FEMALE));
+		userService.save(new User("Nick", "987654321", GenderEnum.OTHER));
 	}
 }

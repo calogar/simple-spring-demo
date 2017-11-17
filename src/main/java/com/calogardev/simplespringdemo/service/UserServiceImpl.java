@@ -1,5 +1,6 @@
 package com.calogardev.simplespringdemo.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -38,6 +39,7 @@ public class UserServiceImpl implements UserService {
 		} else {
 			log.info("Update user with id = " + user.getId());
 		}
+		user.setLastUpdated(new Date());
 		return userDao.save(user);
 	}
 

@@ -1,10 +1,17 @@
 package com.calogardev.simplespringdemo.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.calogardev.simplespringdemo.enums.GenderEnum;
 
 @Entity
 public class User implements Serializable {
@@ -19,13 +26,21 @@ public class User implements Serializable {
 
 	private String password;
 
+	@Enumerated(EnumType.STRING)
+	private GenderEnum gender;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastUpdated;
+
 	public User() {
 	}
 
-	public User(String username, String password) {
+	public User(String username, String password, GenderEnum gender) {
 		super();
 		this.username = username;
 		this.password = password;
+		this.gender = gender;
+		this.lastUpdated = new Date();
 	}
 
 	public Integer getId() {
@@ -50,5 +65,27 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public GenderEnum getGender() {
+		return gender;
+	}
+
+	public void setGender(GenderEnum gender) {
+		this.gender = gender;
+	}
+
+	public Date getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", gender=" + gender
+				+ ", lastUpdated=" + lastUpdated + "]";
 	}
 }
